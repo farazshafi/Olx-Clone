@@ -5,9 +5,18 @@ import Search from "../../assets/Search";
 import SellButton from "../../assets/SellButton";
 import SellButtonPlus from "../../assets/SellButtonPlus";
 import "./Header.css";
+import { useContext } from "react";
+import MyContext from "../../context/MyContext";
+import { logout } from "../../firebase";
 
 const Header = () => {
-  const navigate = useNavigate()
+  const { user } = useContext(MyContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async() => {
+    await logout()
+    navigate('/login')
+  }
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -34,14 +43,24 @@ const Header = () => {
           <span> ENGLISH </span>
           <Arrow />
         </div>
-        <div onClick={()=>navigate("/login")} className="loginPage">
-          <span>Login</span>
-          <hr />
-        </div>
+        {user ? (
+          <div onClick={handleLogout} className="loginPage">
+            <span>Logout</span>
+            <hr />
+          </div>
+        ) : (
+          <div onClick={() => navigate("/login")} className="loginPage">
+            <span>Login</span>
+            <hr />
+          </div>
+        )}
 
         <div className="sellMenu">
-         <SellButton />
-          <div onClick={()=> navigate("/add_product")} className="sellMenuContent">
+          <SellButton />
+          <div
+            onClick={() => navigate("/add_product")}
+            className="sellMenuContent"
+          >
             <SellButtonPlus />
             <span>SELL</span>
           </div>

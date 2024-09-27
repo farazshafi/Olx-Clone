@@ -1,227 +1,54 @@
-import Heart from "../../assets/Heart"
-import bikeImg from "/bike.jpg"
-import "./Post.css"
-import { useNavigate } from "react-router-dom"
+import Heart from "../../assets/Heart";
+import "./Post.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getProducts } from "../../firebase";
+
 const Post = () => {
-  const navigate = useNavigate()
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productData = await getProducts();
+      setProducts(productData);
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div className="postParentDiv">
-      <div className="moreView">
-        <div className="heading">
-          <span>Quick Menu</span>
-          <span>View more</span>
-        </div>
-        <div className="cards">
-          <div
-            className="card"
-            onClick={()=>navigate("/product/123")}
-          >
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
-          <div
-            className="card"
-            onClick={()=>navigate("/product/123")}
-          >
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
-          <div
-            className="card"
-            onClick={()=>navigate("/product/123")}
-          >
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
-          <div
-            className="card"
-            onClick={()=>navigate("/product/123")}
-          >
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
-          <div
-            className="card"
-            onClick={()=>navigate("/product/123")}
-          >
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
-          <div
-            className="card"
-            onClick={()=>navigate("/product/123")}
-          >
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="recommendations">
         <div className="heading">
           <span>Fresh recommendations</span>
         </div>
         <div className="cards">
-          <div className="card"
-          onClick={()=>navigate("/product/123")}>
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
-          <div className="card"
-          onClick={()=>navigate("/product/123")}>
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
-          <div className="card"
-          onClick={()=>navigate("/product/123")}>
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
-          <div className="card"
-          onClick={()=>navigate("/product/123")}>
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
-          <div className="card"
-          onClick={()=>navigate("/product/123")}>
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src={bikeImg} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
+          {products.length > 0 ? (
+            products.map(product => (
+              <div className="card" key={product.id} onClick={() => navigate(`/product/${product.id}`)}>
+                <div className="favorite">
+                  <Heart />
+                </div>
+                <div className="image">
+                  <img src={product.imageUrl} alt={product.name} />
+                </div>
+                <div className="content">
+                  <p className="rate">&#x20B9; {product.price}</p>
+                  <span className="kilometer">{product.category}</span>
+                  <p className="name">{product.name}</p>
+                </div>
+                <div className="date">
+                  <span>{new Date().toLocaleDateString()}</span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No products available</p>
+          )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;
