@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { getFirestore, addDoc, collection, getDocs } from "firebase/firestore"; 
+import { getFirestore, addDoc, collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -72,7 +72,7 @@ const logout = async () => {
 const addProduct = async (name, category, price, image) => {
   try {
     // Step 1: Upload the image to Firebase Storage
-    console.log(image.name)
+    console.log(image.name);
     const imageRef = ref(storage, `products/${image.name}`);
     await uploadBytes(imageRef, image);
     const imageUrl = await getDownloadURL(imageRef); // Step 2: Get the image URL
@@ -95,12 +95,13 @@ const getProducts = async () => {
   try {
     const productsCollection = collection(db, "products");
     const snapshot = await getDocs(productsCollection);
-    console.log("snapshot", snapshot)
+    console.log("before mapping all products", snapshot.docs)
     // Map through the documents to create an array of products
-    const products = snapshot.docs.map(doc => ({
+    const products = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
+    console.log("after mapping all products", products)
 
     return products; // Return the array of products
   } catch (error) {
@@ -110,4 +111,20 @@ const getProducts = async () => {
   }
 };
 
-export { auth, db, login, signUp, logout, addProduct, getProducts };
+const getSingleProduct = async (id) => {
+  try {
+    const docRef = doc(db, "products",id);
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists()){
+      return docSnap.data()
+    }else{
+      toast.error("Product not found.");
+      return null; // Return null if the product does not exist
+    }
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to fetch product."); 
+  }
+};
+
+export { auth, db, login, signUp, logout, addProduct, getProducts, getSingleProduct };
